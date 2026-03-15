@@ -6,14 +6,14 @@ public class PauseManager : MonoBehaviour
 {
     public static PauseManager Instance { get; private set; }
 
-    [SerializeField]public GameObject objetoMenuPausa; 
+    [SerializeField] public GameObject objetoMenuPausa;
     private bool estaPausado = false;
 
     private void Awake()
     {
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
-        
+
         Cursor.visible = estaPausado;
         Cursor.lockState = estaPausado ? CursorLockMode.None : CursorLockMode.Locked;
     }
@@ -30,17 +30,17 @@ public class PauseManager : MonoBehaviour
             TogglePause();
         }
     }
-    
+
     public void TogglePause()
     {
         estaPausado = !estaPausado;
 
-        Time.timeScale = estaPausado ? 0f : 1f; 
+        Time.timeScale = estaPausado ? 0f : 1f;
         objetoMenuPausa.SetActive(estaPausado);
 
         UpdateCursorState();
     }
-    
+
     private void UpdateCursorState()
     {
         Cursor.visible = estaPausado;
@@ -51,25 +51,33 @@ public class PauseManager : MonoBehaviour
     {
         TogglePause();
     }
-    
+
     public void Restart()
     {
+        // 1. Quitar la pausa
         TogglePause();
-        GameSceneManager.Instance.ReiniciarEscenaActual();
-        GameSceneManager.Instance.vidas = 3;
-        FindFirstObjectByType<Ball>().Score = 0.0f;
-        UIManager.Instance.ScoreText.SetText("Score: " + 0);
 
+        // 2. Resetear datos (esto dispara los eventos automáticamente)
+        GameData.Instance.ResetProgress();
+
+        // 3. Reiniciar la escena
+        GameSceneManager.Instance.ReiniciarEscenaActual();
     }
+
     public void BackToMenu()
     {
         Ball bola = FindFirstObjectByType<Ball>();
         if (bola != null)
         {
-            bola.PrepararCambioEscena(); // Aquí le decimos que "no ha muerto, solo nos vamos"
+            bola.PrepararCambioEscena();
         }
         TogglePause();
+        if (GameData.Instance != null)
+        {
+            GameData.Instance.ResetProgress();
+        }
+
         GameSceneManager.Instance.CargarEscena("MainMenu");
-        
+
     }
 }

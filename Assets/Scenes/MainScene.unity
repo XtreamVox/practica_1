@@ -951,8 +951,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ef1c7eee558dc44ba74e2d82f468a8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::UIManager
-  <ScoreText>k__BackingField: {fileID: 1064901638}
-  <LivesText>k__BackingField: {fileID: 62642351}
+  scoreText: {fileID: 1064901638}
+  livesText: {fileID: 62642351}
+  hudContainer: {fileID: 1963281000}
 --- !u!4 &160090406
 Transform:
   m_ObjectHideFlags: 0
@@ -1301,8 +1302,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77752ce2e56212c4593d94ea7c023ba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Coin
-  sonidoMoneda: {fileID: 0}
-  sfxSource: {fileID: 0}
 --- !u!1 &202435117
 GameObject:
   m_ObjectHideFlags: 0
@@ -1971,8 +1970,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77752ce2e56212c4593d94ea7c023ba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Coin
-  sonidoMoneda: {fileID: 0}
-  sfxSource: {fileID: 0}
 --- !u!1001 &295136265
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3323,8 +3320,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77752ce2e56212c4593d94ea7c023ba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Coin
-  sonidoMoneda: {fileID: 0}
-  sfxSource: {fileID: 0}
 --- !u!1 &583344188 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8593051584395136667, guid: f7d0ead425960de4599b442670234520, type: 3}
@@ -3480,6 +3475,18 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 1578540665}
+        m_TargetAssemblyTypeName: GameData, Assembly-CSharp
+        m_MethodName: ResetProgress
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
       - m_Target: {fileID: 160090407}
         m_TargetAssemblyTypeName: PauseManager, Assembly-CSharp
         m_MethodName: BackToMenu
@@ -3643,6 +3650,18 @@ MonoBehaviour:
       - m_Target: {fileID: 160090407}
         m_TargetAssemblyTypeName: PauseManager, Assembly-CSharp
         m_MethodName: Restart
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1578540665}
+        m_TargetAssemblyTypeName: GameData, Assembly-CSharp
+        m_MethodName: ResetProgress
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3971,7 +3990,7 @@ GameObject:
   - component: {fileID: 731887870}
   m_Layer: 0
   m_Name: Cube (2)
-  m_TagString: Untagged
+  m_TagString: DeadZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5241,6 +5260,135 @@ Transform:
   - {fileID: 846409886}
   m_Father: {fileID: 53691612}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &943575265
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 943575267}
+  - component: {fileID: 943575266}
+  m_Layer: 0
+  m_Name: BGM
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!82 &943575266
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 943575265}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_Resource: {fileID: 8300000, guid: e4bae80ed4636714a8c2710cc8022de6, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+--- !u!4 &943575267
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 943575265}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 326.005, y: 0, z: 238.03287}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &950571696
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5592,8 +5740,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77752ce2e56212c4593d94ea7c023ba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Coin
-  sonidoMoneda: {fileID: 0}
-  sfxSource: {fileID: 0}
 --- !u!1 &1015037609 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3236275330321936112, guid: dea9f19d7ee1f6a47a85b54be31cb9b0, type: 3}
@@ -5668,7 +5814,7 @@ GameObject:
   - component: {fileID: 1031141560}
   m_Layer: 0
   m_Name: Cube (4)
-  m_TagString: Untagged
+  m_TagString: DeadZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7229,7 +7375,7 @@ GameObject:
   - component: {fileID: 1292286635}
   m_Layer: 0
   m_Name: Cube (1)
-  m_TagString: Untagged
+  m_TagString: DeadZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7988,8 +8134,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77752ce2e56212c4593d94ea7c023ba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Coin
-  sonidoMoneda: {fileID: 0}
-  sfxSource: {fileID: 0}
 --- !u!1 &1524611480
 GameObject:
   m_ObjectHideFlags: 0
@@ -8113,6 +8257,52 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: -5097680320962588185, guid: 4e630d52eb0a7c94d81a76c596960e1a, type: 3}
+--- !u!1 &1578540664
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1578540666}
+  - component: {fileID: 1578540665}
+  m_Layer: 0
+  m_Name: GameManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1578540665
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1578540664}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a169f7430c5e25b4bbc71e742285dc7c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameData
+  vidas: 3
+  puntuacion: 0
+--- !u!4 &1578540666
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1578540664}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 321.02094, y: 0, z: 233.22215}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1599056229 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8593051584395136667, guid: f7d0ead425960de4599b442670234520, type: 3}
@@ -8165,7 +8355,7 @@ GameObject:
   - component: {fileID: 1604608986}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: DeadZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9020,7 +9210,7 @@ GameObject:
   - component: {fileID: 1823414911}
   m_Layer: 0
   m_Name: Cube (3)
-  m_TagString: Untagged
+  m_TagString: DeadZone
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9541,8 +9731,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 77752ce2e56212c4593d94ea7c023ba6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Coin
-  sonidoMoneda: {fileID: 0}
-  sfxSource: {fileID: 0}
 --- !u!1 &1963281000
 GameObject:
   m_ObjectHideFlags: 0
@@ -10490,3 +10678,5 @@ SceneRoots:
   - {fileID: 160090406}
   - {fileID: 2017771308}
   - {fileID: 1202717515}
+  - {fileID: 943575267}
+  - {fileID: 1578540666}

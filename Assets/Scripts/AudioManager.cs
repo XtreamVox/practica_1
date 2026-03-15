@@ -1,36 +1,59 @@
-using System;
 using UnityEngine;
+using System.Collections.Generic;
 
 public class AudioManager : MonoBehaviour
 {
-    [SerializeField]private AudioSource sfxSource;
-    public static AudioManager Manager { get; private set; }
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
+    public static AudioManager Instance { get; private set; }
+
+    [Header("Componentes de Audio")]
+    [SerializeField] private AudioSource musicSource;
+    [SerializeField] private AudioSource sfxSource;
+
+    [Header("Librería de Efectos")]
+    [SerializeField] private List<SoundEffect> sfxLibrary;
+
+    [System.Serializable]
+    public struct SoundEffect
+    {
+        public string name;
+        public AudioClip clip;
+    }
+
     private void Awake()
     {
-        if (Manager == null)
+        // Patrón Singleton Persistente
+        if (Instance == null)
         {
-            Manager = this;
-            DontDestroyOnLoad(this.gameObject);
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
         }
-        else 
-            Destroy(this.gameObject);
-        
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
-    void Start()
+    public void PlayMusic(AudioClip newClip)
     {
-        
+        if (musicSource.clip == newClip) return; // Ya está sonando esta pista
+
+        musicSource.clip = newClip;
+        musicSource.loop = true; // Asegura que la música sea un bucle
+        musicSource.Play();
     }
 
-    // Update is called once per frame
-    void Update()
+    public void PlaySfx(string name)
     {
+        SoundEffect effect = sfxLibrary.Find(x => x.name == name);
         
-    }
-
-    public void PlaySfx(AudioClip clipToPlay)
-    {
-        sfxSource.PlayOneShot(clipToPlay);
+        if (effect.clip != null)
+        {
+            // PlayOneShot permite que varios sonidos suenen a la vez
+            sfxSource.PlayOneShot(effect.clip);
+        }
+        else
+        {
+            Debug.LogWarning($"El efecto '{name}' no existe en la librería.");
+        }
     }
 }

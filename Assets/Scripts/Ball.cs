@@ -21,7 +21,6 @@ public class Ball : MonoBehaviour
     private Rigidbody rb;
     private PlayerInput playerInput;
     private Camera mainCamera;
-    public float Score { private get; set; }
     
     private Vector2 inputVector;
     private bool isGrounded;
@@ -59,6 +58,7 @@ public class Ball : MonoBehaviour
             // Limpiamos velocidad vertical antes de saltar para que el salto sea constante
             rb.linearVelocity = new Vector3(rb.linearVelocity.x, 0, rb.linearVelocity.z);
             rb.AddForce(Vector3.up * jumpImpulse, ForceMode.Impulse);
+            AudioManager.Instance.PlaySfx("JumpSfx");
         }
     }
 
@@ -113,15 +113,19 @@ public class Ball : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent(out Muro thisWall))
             thisWall.UpdateHealth(other.relativeVelocity.magnitude);
-        
+
         if (other.gameObject.TryGetComponent(out SpringJoint thisSpring))
+        {
             thisSpring.spring = 500;
-        
+            AudioManager.Instance.PlaySfx("MuelleSfx");
+        }
+
         if (other.gameObject.TryGetComponent(out Meta thisMeta))
         {
             if(!SceneManager.GetActiveScene().name.Equals("Victoria"))
             {
                 PrepararCambioEscena();
+                AudioManager.Instance.PlaySfx("VictorySfx");
                 GameSceneManager.Instance.CargarEscena("Victoria");
             }
         }
@@ -131,13 +135,14 @@ public class Ball : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent(out Coin thisCoin))
         {
-            this.Score += thisCoin.ConsumeCoin();
+            GameData.Instance.SumarPuntos(thisCoin.ConsumeCoin());
             if(UIManager.Instance != null)
-                UIManager.Instance.ScoreText.SetText("Score: " + this.Score);
+                UIManager.Instance.ActualizarScoreUI(GameData.Instance.Puntuacion);
             Destroy(other.gameObject);
         }
-    }
 
+    }
+    
     private void OnDestroy()
     {
         if (GameSceneManager.Instance != null && !cambiandoDeEscena)
@@ -145,7 +150,7 @@ public class Ball : MonoBehaviour
             GameSceneManager.Instance.PerderVida();
         }
     }
-
+    
     private void OnDrawGizmosSelected()
     {
         Gizmos.color = isGrounded ? Color.green : Color.red;

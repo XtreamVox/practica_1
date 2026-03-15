@@ -1,13 +1,12 @@
-using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class UIManager : MonoBehaviour
 {
-    [field: SerializeField] public TMP_Text ScoreText { get; private set; }
-    [field: SerializeField] public TMP_Text LivesText  { get; private set; }
-
+    [SerializeField] private TMP_Text scoreText;
+    [SerializeField] private TMP_Text livesText;
+    [SerializeField] private GameObject hudContainer; 
     public static UIManager Instance { get; private set; }
 
     private void Awake()
@@ -16,62 +15,67 @@ public class UIManager : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(this.gameObject);
-            // Nos suscribimos al evento de carga de escena
-            SceneManager.sceneLoaded += OnSceneLoaded; 
         }
         else
         {
             Destroy(this.gameObject);
         }
     }
-
-    private void OnDestroy()
+    
+    private void OnEnable()
     {
-        // Muy importante: desuscribirse para evitar fugas de memoria
+        // Suscripción a eventos: La única forma de actualizar el HUD
+        if (GameData.Instance != null)
+        {
+            GameData.Instance.OnVidasChanged += ActualizarHUD;
+            GameData.Instance.OnPuntosChanged += ActualizarHUD;
+        }
+        SceneManager.sceneLoaded += OnSceneLoaded;
+    }
+    
+    private void OnDisable()
+    {
+        // Limpieza de suscripciones para evitar errores de memoria
+        if (GameData.Instance != null)
+        {
+            GameData.Instance.OnVidasChanged -= ActualizarHUD;
+            GameData.Instance.OnPuntosChanged -= ActualizarHUD;
+        }
         SceneManager.sceneLoaded -= OnSceneLoaded;
     }
 
-// Este método se ejecuta AUTOMÁTICAMENTE cada vez que cambia la escena
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        if (scene.name.Equals("MainScene"))
-        {
-            this.gameObject.SetActive(true);
-            // Buscamos los nuevos textos en la escena recién cargada
-            // Puedes usar Tags o buscarlos por tipo si solo hay uno
-            ScoreText = GameObject.Find("ScoreText")?.GetComponent<TMP_Text>();
-            LivesText = GameObject.Find("LivesText")?.GetComponent<TMP_Text>();
-
-            // Sincronizamos los valores actuales nada más cargar
-            if (GameSceneManager.Instance != null)
-            {
-                ActualizarVidas(GameSceneManager.Instance.vidas);
-            }
-        }
-        else
-        {
-            this.gameObject.SetActive(false);
-        }
+        bool esEscenaDeJuego = scene.name == "MainScene";
+    
+        // En lugar de desactivar el script, desactivamos el contenedor visual
+        if (hudContainer != null)
+            hudContainer.SetActive(esEscenaDeJuego);
+    
+        if (esEscenaDeJuego) ActualizarHUD();
     }
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
+    private void ActualizarHUD()
     {
-        // Al empezar el nivel, pedimos las vidas actuales al Manager
-        ActualizarVidas(GameSceneManager.Instance.vidas);
+        if (GameData.Instance == null) return;
+
+        // Actualizamos los textos usando las propiedades de GameData
+        if (livesText != null) 
+            livesText.text = "Rocks: " + GameData.Instance.Vidas;
+        
+        if (scoreText != null) 
+            scoreText.text = "Score: " + GameData.Instance.Puntuacion;
+            
+        Debug.Log("HUD actualizado: Vidas " + GameData.Instance.Vidas);
+    }
+    // Dentro de UIManager.cs
+    public void ActualizarScoreUI(int nuevoScore)
+    {
+        if (scoreText != null) scoreText.text = "Score: " + nuevoScore;
     }
 
-    public void ActualizarVidas(int cantidad)
+    public void ActualizarVidasUI(int nuevasVidas)
     {
-        LivesText.SetText("Rocks: " + cantidad);
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.K))
-            SceneManager.LoadScene("Ejemplo");
-        if (Input.GetKeyDown(KeyCode.L))
-            SceneManager.LoadScene("SampleScene");
+        if (livesText != null) livesText.text = "Rocks: " + nuevasVidas;
     }
 }

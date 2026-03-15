@@ -10,12 +10,23 @@ public class GameOverScreen : MonoBehaviour
 
     public void Reintentar()
     {
-        GameSceneManager.Instance.vidas = 3;
+        if (GameData.Instance != null)
+        {
+            GameData.Instance.ResetProgress(); 
+        }
+        
         GameSceneManager.Instance.CargarEscena("MainScene");
     }
 
-    public void IrAlMenu()
+    public void BackToMenu()
     {
+        
+        if (GameData.Instance != null)
+        {
+            GameData.Instance.ResetProgress();
+        }
+
         GameSceneManager.Instance.CargarEscena("MainMenu");
+
     }
 }

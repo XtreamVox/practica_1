@@ -9,28 +9,27 @@ public class GameSceneManager : MonoBehaviour
 
     public void PerderVida()
     {
-        vidas--;
-        Debug.Log("Vidas restantes: " + vidas);
+        GameData.Instance.RestarVida();
+        int vidasActuales = GameData.Instance.Vidas;
+
         if (UIManager.Instance != null) 
         {
-            UIManager.Instance.ActualizarVidas(vidas);
+            UIManager.Instance.ActualizarVidasUI(vidasActuales);
         }
-        if (vidas > 0)
+
+        if (vidasActuales > 0)
         {
             ReiniciarEscenaActual();
         }
         else
         {
-            // Opcional: Cargar escena de Game Over
-            CargarEscena("GameOver"); 
-            vidas = 3; // Resetear para la próxima partida
+            GameData.Instance.ResetProgress();
+            CargarEscena("GameOver");
         }
-        
     }
     
     private void Awake()
     {
-        // Lógica del Singleton
         if (Instance != null && Instance != this)
         {
             Destroy(this.gameObject);
@@ -38,7 +37,6 @@ public class GameSceneManager : MonoBehaviour
         }
 
         Instance = this;
-        // Hace que este objeto persista entre escenas
         DontDestroyOnLoad(this.gameObject);
     }
 
@@ -49,7 +47,6 @@ public class GameSceneManager : MonoBehaviour
     
     public void ReiniciarEscenaActual()
     {
-        // Buscamos a la bola y le decimos que no reste vida al destruirse
         Ball jugador = FindFirstObjectByType<Ball>();
         if (jugador != null) 
         {
