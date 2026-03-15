@@ -204,7 +204,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.20713997, y: 1.06, z: 0.032579422}
-  m_LocalScale: {x: 1, y: 0.4191452, z: 0.91583425}
+  m_LocalScale: {x: 3.15, y: 0.2, z: 2.666543}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1472724669930190784}
@@ -242,7 +242,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: b45a15fff385e4a46ab2bf7a9b0214e8, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -326,8 +326,8 @@ SpringJoint:
   m_ConnectedArticulationBody: {fileID: 0}
   m_Anchor: {x: 0, y: -0.48, z: 0}
   m_AutoConfigureConnectedAnchor: 0
-  m_ConnectedAnchor: {x: 0, y: 3.17, z: 0}
-  m_Spring: 40
+  m_ConnectedAnchor: {x: 0, y: 5, z: 0}
+  m_Spring: 0
   m_Damper: 0.2
   m_MinDistance: 0
   m_MaxDistance: 0

@@ -173,7 +173,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 2.0811934, y: -0.2097944, z: 2.117306}
+  m_LocalScale: {x: 2.0811934, y: 0.2097944, z: 2.117306}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 486761957643393213}
@@ -293,7 +293,7 @@ HingeJoint:
   serializedVersion: 3
   m_ConnectedBody: {fileID: 3292045229055910306}
   m_ConnectedArticulationBody: {fileID: 0}
-  m_Anchor: {x: 0, y: 0.5, z: 1.06}
+  m_Anchor: {x: 0, y: 0.16, z: 0.74}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
   m_ConnectedAnchor: {x: 0, y: 0, z: 0}
