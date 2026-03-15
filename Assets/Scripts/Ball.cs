@@ -1,5 +1,7 @@
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(PlayerInput))]
@@ -19,7 +21,7 @@ public class Ball : MonoBehaviour
     private Rigidbody rb;
     private PlayerInput playerInput;
     private Camera mainCamera;
-    private float score = 0.0f;
+    public float Score { private get; set; }
     
     private Vector2 inputVector;
     private bool isGrounded;
@@ -37,7 +39,7 @@ public class Ball : MonoBehaviour
         // Aumentamos el arrastre angular para que la rotación sea más natural
         rb.angularDamping = 2f; 
     }
-
+    
     private void OnEnable()
     {
         playerInput.actions["Move"].performed += ctx => inputVector = ctx.ReadValue<Vector2>();
@@ -117,8 +119,11 @@ public class Ball : MonoBehaviour
         
         if (other.gameObject.TryGetComponent(out Meta thisMeta))
         {
-            PrepararCambioEscena();
-            GameSceneManager.Instance.CargarEscena("Victoria");
+            if(!SceneManager.GetActiveScene().name.Equals("Victoria"))
+            {
+                PrepararCambioEscena();
+                GameSceneManager.Instance.CargarEscena("Victoria");
+            }
         }
     }
 
@@ -126,9 +131,9 @@ public class Ball : MonoBehaviour
     {
         if (other.gameObject.TryGetComponent(out Coin thisCoin))
         {
-            this.score += thisCoin.ConsumeCoin();
+            this.Score += thisCoin.ConsumeCoin();
             if(UIManager.Instance != null)
-                UIManager.Instance.ScoreText.SetText("Score: " + this.score);
+                UIManager.Instance.ScoreText.SetText("Score: " + this.Score);
             Destroy(other.gameObject);
         }
     }

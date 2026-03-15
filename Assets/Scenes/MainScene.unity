@@ -2347,7 +2347,7 @@ Transform:
   m_GameObject: {fileID: 330585543}
   serializedVersion: 2
   m_LocalRotation: {x: 0.25340128, y: 0.000000044288758, z: -0.000000011601485, w: 0.9673613}
-  m_LocalPosition: {x: 15.110001, y: 62.5, z: -18.300001}
+  m_LocalPosition: {x: -15.84, y: 73.84, z: -101.2}
   m_LocalScale: {x: 0.99116, y: 0.99116, z: 0.99116}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2495,7 +2495,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Restart
+  m_text: RESTART
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -3410,7 +3410,7 @@ GameObject:
   - component: {fileID: 616901505}
   - component: {fileID: 616901504}
   m_Layer: 5
-  m_Name: Exit
+  m_Name: BackToMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3480,9 +3480,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 621494886}
-        m_TargetAssemblyTypeName: GameSceneManager, Assembly-CSharp
-        m_MethodName: SalirDelJuego
+      - m_Target: {fileID: 160090407}
+        m_TargetAssemblyTypeName: PauseManager, Assembly-CSharp
+        m_MethodName: BackToMenu
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3530,51 +3530,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 616901502}
   m_CullTransparentMesh: 1
---- !u!1 &621494884
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 621494885}
-  - component: {fileID: 621494886}
-  m_Layer: 0
-  m_Name: SceneManager
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &621494885
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 621494884}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &621494886
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 621494884}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e3776d551cded754cb720c7b6fe0f9d4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::GameSceneManager
-  vidas: 3
 --- !u!1 &625460168 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5910532665232669396, guid: f7d0ead425960de4599b442670234520, type: 3}
@@ -3685,21 +3640,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 621494886}
-        m_TargetAssemblyTypeName: GameSceneManager, Assembly-CSharp
-        m_MethodName: ReiniciarEscenaActual
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
       - m_Target: {fileID: 160090407}
         m_TargetAssemblyTypeName: PauseManager, Assembly-CSharp
-        m_MethodName: Reanudar
+        m_MethodName: Restart
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -4291,7 +4234,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Exit
+  m_text: MENU
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4705,7 +4648,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Resume
+  m_text: RESUME
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -5366,6 +5309,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 2679490913684677645, guid: 5fe38f08f9bb9c142bb0d413fa4d5975, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 607f4434b60e14c4584f594fa425e509, type: 2}
+    - target: {fileID: 4840812259895462937, guid: 5fe38f08f9bb9c142bb0d413fa4d5975, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 607f4434b60e14c4584f594fa425e509, type: 2}
     - target: {fileID: 4952197218345211836, guid: 5fe38f08f9bb9c142bb0d413fa4d5975, type: 3}
       propertyPath: m_Layer
       value: 3
@@ -6025,7 +5976,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 160090407}
         m_TargetAssemblyTypeName: PauseManager, Assembly-CSharp
-        m_MethodName: Reanudar
+        m_MethodName: Resume
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6494,7 +6445,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WaterZone
   resistenciaAgua: 1
-  fuerzaFlotacion: 7
+  fuerzaFlotacion: 2
 --- !u!65 &1202717512
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -7252,7 +7203,7 @@ Transform:
   m_GameObject: {fileID: 1273815496}
   serializedVersion: 2
   m_LocalRotation: {x: 0.25340128, y: 0.000000048262628, z: -0.00000002677177, w: 0.9673613}
-  m_LocalPosition: {x: 15.110001, y: 62.5, z: -18.300001}
+  m_LocalPosition: {x: -15.84, y: 73.84, z: -101.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -10175,15 +10126,15 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5952946935881735907, guid: f7d4b96013e95f5478b66137db1f06c0, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 24.01
+      value: -6.94
       objectReference: {fileID: 0}
     - target: {fileID: 5952946935881735907, guid: f7d4b96013e95f5478b66137db1f06c0, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 60.25
+      value: 71.59
       objectReference: {fileID: 0}
     - target: {fileID: 5952946935881735907, guid: f7d4b96013e95f5478b66137db1f06c0, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 4.9
+      value: -78
       objectReference: {fileID: 0}
     - target: {fileID: 5952946935881735907, guid: f7d4b96013e95f5478b66137db1f06c0, type: 3}
       propertyPath: m_LocalRotation.w
@@ -10537,6 +10488,5 @@ SceneRoots:
   - {fileID: 654854585}
   - {fileID: 1399641047}
   - {fileID: 160090406}
-  - {fileID: 621494885}
   - {fileID: 2017771308}
   - {fileID: 1202717515}

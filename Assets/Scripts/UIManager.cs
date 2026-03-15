@@ -34,15 +34,23 @@ public class UIManager : MonoBehaviour
 // Este método se ejecuta AUTOMÁTICAMENTE cada vez que cambia la escena
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        // Buscamos los nuevos textos en la escena recién cargada
-        // Puedes usar Tags o buscarlos por tipo si solo hay uno
-        ScoreText = GameObject.Find("ScoreText")?.GetComponent<TMP_Text>();
-        LivesText = GameObject.Find("LivesText")?.GetComponent<TMP_Text>();
-    
-        // Sincronizamos los valores actuales nada más cargar
-        if(GameSceneManager.Instance != null)
+        if (scene.name.Equals("MainScene"))
         {
-            ActualizarVidas(GameSceneManager.Instance.vidas);
+            this.gameObject.SetActive(true);
+            // Buscamos los nuevos textos en la escena recién cargada
+            // Puedes usar Tags o buscarlos por tipo si solo hay uno
+            ScoreText = GameObject.Find("ScoreText")?.GetComponent<TMP_Text>();
+            LivesText = GameObject.Find("LivesText")?.GetComponent<TMP_Text>();
+
+            // Sincronizamos los valores actuales nada más cargar
+            if (GameSceneManager.Instance != null)
+            {
+                ActualizarVidas(GameSceneManager.Instance.vidas);
+            }
+        }
+        else
+        {
+            this.gameObject.SetActive(false);
         }
     }
 
