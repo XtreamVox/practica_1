@@ -4,6 +4,8 @@ using UnityEngine;
 public class Spawner : MonoBehaviour
 {
     [SerializeField]private GameObject bouncyBallPrefab;
+
+    [SerializeField] private float force = 20;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -21,21 +23,11 @@ public class Spawner : MonoBehaviour
         while (true)
         {
             GameObject copy = Instantiate(bouncyBallPrefab, transform.position, Quaternion.identity);
-            copy.GetComponent<Rigidbody>().AddForce(Vector3.forward * Random.Range(0f, 20f), ForceMode.Impulse);
-            Destroy(copy.gameObject, 2f);
-            yield return new WaitForSeconds(1f);
+            copy.GetComponent<Rigidbody>().AddForce(-this.transform.right * force, ForceMode.Impulse);
+            yield return new WaitForSeconds(2.5f);
         }
     }
-  
-    private IEnumerator Semaforo()
-    {
-        Debug.Log("Verde");
-        yield return new WaitForSeconds(2f);        
-        Debug.Log("Amarillo");
-        yield return new WaitForSeconds(1f);        
-        Debug.Log("Rojo");
-
-    }
+    
     // Update is called once per frame
     void Update()
     {
